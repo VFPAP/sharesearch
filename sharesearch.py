@@ -1185,7 +1185,7 @@ class Program(object):
 
 
     def nmap_enum_nfs_shares(self, ip): # returns { 'share' : ['CIDR', right-undef] }
-        nmap_cmd_tmpl = 'nmap --host-timeout {1} -n -sT --script nfs-showmount.nse -p 111,2049 {0} | grep "|" | grep "/" | replace "|_" "| "'
+        nmap_cmd_tmpl = 'nmap --host-timeout {1} -n -sT --script nfs-showmount.nse -p 111,2049 {0} | grep "|" | grep "/" | sed -e "s/|_/| /g"'
 
 
         nmap_cmd = nmap_cmd_tmpl.format(ip, self.cmd_timeout)
